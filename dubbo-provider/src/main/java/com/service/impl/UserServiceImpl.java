@@ -1,6 +1,6 @@
-package com.provider.service.impl;
+package com.service.impl;
 
-import com.api.service.UserService;
+import com.api.UserService;
 
 public class UserServiceImpl implements UserService {
     public String getName(int userId) {

@@ -11,13 +11,11 @@
     <dubbo:application name="dubbo-consumer"/>
 
     <!-- 使用zookeeper注册中心暴露服务地址 -->
-    <dubbo:registry address="zookeeper://10.100.106.121:2181"/>
+    <dubbo:registry address="zookeeper://localhost:2181"/>
 
- <!--   <dubbo:reference id="userService" interface="com.api.service.UserService"></dubbo:reference>-->
+    <dubbo:reference id="helloService" interface="com.api.HelloService"/>
 
-    <dubbo:reference id="helloService" interface="org.dubboApi.HelloService"></dubbo:reference>
-
-
+    <dubbo:reference id="productService" interface="com.api.ProductService"/>
 
 
 </beans>

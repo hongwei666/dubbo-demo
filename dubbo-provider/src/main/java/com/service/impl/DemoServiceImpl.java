@@ -1,6 +1,6 @@
-package com.provider.service.impl;
+package com.service.impl;
 
-import com.api.service.DemoService;
+import com.api.DemoService;
 
 public class DemoServiceImpl implements DemoService {
     public String sayHello(String name) {
