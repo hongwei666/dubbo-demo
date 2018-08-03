@@ -8,9 +8,35 @@
     http://code.alibabatech.com/schema/dubbo
     http://code.alibabatech.com/schema/dubbo/dubbo.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <context:component-scan base-package="com.service.impl">
+    <!--Spring Bean注解扫描-->
+    <context:component-scan base-package="com"/>
 
-    </context:component-scan>
+    <!-- 接口实现类-->
+    <!--<bean id="userService" class="com.service.impl.UserServiceImpl"/>
+    <bean id="productService" class="com.service.impl.ProductServiceimpl"/>-->
+
+    <!--读取属性文件-->
+    <context:property-placeholder ignore-resource-not-found="true" location="classpath:jdbc.properties"/>
+
+    <!--dataSource配置-->
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+        <property name="url" value="${url}"/>
+        <property name="username" value="${username}"/>
+        <property name="password" value="${password}"/>
+    </bean>
+
+    <!--SqlSession配置-->
+    <bean id="sqlSession" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="typeAliasesPackage" value="com.api"/>
+        <property name="dataSource" ref="dataSource"/>
+        <property name="mapperLocations" value="classpath:mapper/*.xml"/>
+    </bean>
+
+    <!--Mapper文件扫描目录配置-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.mapper"/>
+    </bean>
+
     <!-- 提供方应用信息，用于计算依赖关系 -->
     <dubbo:application name="dubbo-provider"/>
 
@@ -21,12 +47,7 @@
     <dubbo:protocol name="dubbo" port="16666"/>
 
     <!-- 声明需要暴露的服务接口 -->
-    <dubbo:service interface="com.api.UserService" ref="userService"/>
+    <!-- <dubbo:service interface="com.api.UserService" ref="userService"/>-->
     <dubbo:service interface="com.api.ProductService" ref="productService"/>
 
-    <!-- 接口实现类-->
-    <bean id="userService" class="com.service.impl.UserServiceImpl"/>
-    <!--<bean id="productService" class="com.service.impl.ProductServiceimpl"/>-->
-
 </beans>
-

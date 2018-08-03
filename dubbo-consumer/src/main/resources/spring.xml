@@ -14,7 +14,7 @@
     <dubbo:registry address="zookeeper://localhost:2181"/>
 
     <dubbo:reference id="helloService" interface="com.api.HelloService"/>
-
+    <dubbo:reference id="userService" interface="com.api.UserService"/>
     <dubbo:reference id="productService" interface="com.api.ProductService"/>
 
 

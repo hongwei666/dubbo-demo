@@ -1,17 +1,16 @@
-import com.api.HelloService;
+import com.api.UserService;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.io.IOException;
 
-public class Test {
+class Test {
     public static void main(String[] args) throws IOException {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
         context.start();
         System.out.println("consumer start");
-        HelloService helloService = context.getBean(HelloService.class);
+        UserService userService = context.getBean(UserService.class);
         System.out.println("consumer user");
-        System.out.println(helloService.sayHello("abc"));
-
+        System.out.println(userService.getName(1));
         System.in.read();
     }
 }
